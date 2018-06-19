@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Stack;
 
 public class b304 {
 
@@ -9,33 +10,32 @@ public class b304 {
 		String nLine;
 		while ((nLine = br.readLine()) != null) {
 			int n = Integer.valueOf(nLine);
-
 			for (int i = 0; i < n; ++i) {
-				String str = br.readLine();
-				int count = 0;
-				int count2 = 0;
-				int strLen = str.length();
-
-				for (int j = 0; j < strLen; ++j) {
-					if (str.charAt(j) == '(') {
-						count++;
-					} else if (str.charAt(j) == '[') {
-						count2++;
-					} else if (str.charAt(j) == ')') {
-						count--;
-						if (count < 0)
+				String input = br.readLine();
+				Stack<Character> stack = new Stack<Character>();
+				boolean isCorrect = true;
+				int inputLen = input.length();
+				for (int j = 0; j < inputLen; ++j) {
+					char temp = input.charAt(j);
+					if (temp == '(' || temp == '[') {
+						stack.push(temp);
+					} else if (temp == ')') {
+						if (stack.isEmpty() || stack.peek() != '(') {
+							isCorrect = false;
 							break;
-					} else if (str.charAt(j) == ']') {
-						count2--;
-						if (count2 < 0)
+						}
+						stack.pop();
+					} else if (temp == ']') {
+						if (stack.isEmpty() || stack.peek() != '[') {
+							isCorrect = false;
 							break;
+						}
+						stack.pop();
 					}
 				}
-				if (count == 0 && count2 == 0) {
-					System.out.println("Yes");
-				} else {
-					System.out.println("No");
-				}
+				if(!stack.empty())
+					isCorrect=false;
+				System.out.println(isCorrect ? "Yes" : "No");
 			}
 		}
 	}
