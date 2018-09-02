@@ -5,21 +5,21 @@ public class d709 {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		int n;
-		boolean[] isNotPrime = new boolean[65535 + 1];
+
+		boolean[] isNotPrime = new boolean[1000000 + 1];
 		isNotPrime[0] = true;
 		isNotPrime[1] = true;
-		for (int a = 2; a * a <= 65535; ++a) {
+		for (int a = 2; a * a <= 1000000; ++a) {
 			if (!isNotPrime[a]) {
-				for (int b = a * a; b <= 65535; b += a) {
+				for (int b = a * a; b <= 1000000; b += a) {
 					isNotPrime[b] = true;
 				}
 			}
 		}
-		
 		StringBuilder sb = new StringBuilder();
+
 		while (scan.hasNext()) {
 			n = scan.nextInt();
-
 			if (n == 0) {
 				System.out.println(sb);
 				break;
