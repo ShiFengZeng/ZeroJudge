@@ -22,14 +22,16 @@ public class d709_2 {
 		String line;
 		while ((line = br.readLine()) != null) {
 			n = Integer.valueOf(line);
-			if (n == 0) {
-				System.out.println(sb);
-				break;
-			} else if (isNotPrime[n]) {
-				sb.append("1\n");
+			if (n != 0) {
+				if (isNotPrime[n])
+					sb.append("1\n");
+
+				else
+					sb.append("0\n");
 			} else {
-				sb.append("0\n");
+				System.out.println(sb);
 			}
-		}		
+
+		}
 	}
 }
